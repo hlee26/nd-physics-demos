@@ -62,14 +62,14 @@ export default async function DemoPage({ params }: { params: { category: string;
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
-      <nav className="text-xs mb-8 flex flex-wrap gap-1" style={{ color: 'var(--nd-muted)' }}>
-        <Link href="/" className="hover:text-nd-gold transition-colors">Home</Link>
+      <nav aria-label="Breadcrumb" className="text-xs mb-8 flex flex-wrap gap-1" style={{ color: 'var(--nd-muted)' }}>
+        <Link href="/" className="breadcrumb-link">Home</Link>
         <span>›</span>
-        <Link href={`/category/${category}`} className="hover:text-nd-gold transition-colors">{CATEGORY_LABELS[category]}</Link>
+        <Link href={`/category/${category}`} className="breadcrumb-link">{CATEGORY_LABELS[category]}</Link>
         <span>›</span>
-        <Link href={`/category/${category}`} className="hover:text-nd-gold transition-colors">{SUBCATEGORY_LABELS[subcategory] || subcategory}</Link>
+        <Link href={`/category/${category}`} className="breadcrumb-link">{SUBCATEGORY_LABELS[subcategory] || subcategory}</Link>
         <span>›</span>
-        <span style={{ color: 'var(--nd-text)' }}>{demo.title}</span>
+        <span aria-current="page" style={{ color: 'var(--nd-text)' }}>{demo.title}</span>
       </nav>
 
       <div className="paper-panel p-8 mb-10 relative overflow-hidden" style={{ animation: 'fadeUp 0.4s ease forwards' }}>

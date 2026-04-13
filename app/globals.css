@@ -58,7 +58,7 @@ body::before {
   background-size: auto, 28px 28px, 28px 28px;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.55;
+  opacity: 0.18;
 }
 
 ::-webkit-scrollbar { width: 8px; }
@@ -67,7 +67,7 @@ body::before {
 ::-webkit-scrollbar-thumb:hover { background: var(--nd-gold); }
 
 .gold-text {
-  background: linear-gradient(135deg, #deb643 0%, var(--nd-gold) 45%, #9c7104 100%);
+  background: linear-gradient(135deg, #996600 0%, var(--nd-gold) 45%, #6b4400 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -97,12 +97,7 @@ body::before {
 }
 .stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
 .stagger-children > *:nth-child(2) { animation-delay: 0.10s; }
-.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
-.stagger-children > *:nth-child(4) { animation-delay: 0.20s; }
-.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
-.stagger-children > *:nth-child(6) { animation-delay: 0.30s; }
-.stagger-children > *:nth-child(7) { animation-delay: 0.35s; }
-.stagger-children > *:nth-child(8) { animation-delay: 0.40s; }
+.stagger-children > *:nth-child(n+3) { animation-delay: 0.15s; }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }
@@ -189,4 +184,14 @@ body::before {
 .catalog-stripe {
   border-left: 4px solid var(--nd-gold);
   padding-left: 1rem;
+}
+
+.breadcrumb-link {
+  color: var(--nd-muted);
+  transition: color 0.15s ease;
+  text-decoration: none;
+}
+.breadcrumb-link:hover {
+  color: var(--nd-gold);
+  text-decoration: underline;
 }
