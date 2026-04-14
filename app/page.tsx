@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import { getAllDemos, getCategories, getDemosByCategory, CATEGORY_LABELS, CATEGORY_ICONS, CATEGORY_COLORS } from '@/lib/demos'
+import { getAllDemos, getCategories, getDemosByCategory, CATEGORY_LABELS, CATEGORY_COLORS } from '@/lib/demos'
 import AiChat from '@/components/AiChat'
+import CategoryIcon from '@/components/CategoryIcon'
 
 export const revalidate = 60 // Re-fetch data every 60 seconds
 
@@ -136,7 +137,9 @@ export default async function HomePage() {
             return (
               <Link key={cat} href={`/category/${cat}`} className="glass-card glass-card-hover p-6 group relative overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-1" style={{ background: color }} />
-                <div className="w-12 h-12 rounded-xl mb-4 flex items-center justify-center text-2xl" style={{ background: `${color}14` }}>{CATEGORY_ICONS[cat]}</div>
+                <div className="w-12 h-12 rounded-xl mb-4 flex items-center justify-center" style={{ background: `${color}14`, color }}>
+                  <CategoryIcon category={cat} size={24} />
+                </div>
                 <h3 className="font-bold text-base mb-1" style={{ fontFamily: 'var(--font-display)', color: 'var(--nd-text)' }}>
                   {CATEGORY_LABELS[cat]}
                 </h3>

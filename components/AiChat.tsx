@@ -57,6 +57,8 @@ export default function AiChat() {
     }
   }
 
+  const canSend = !loading && input.trim().length > 0
+
   return (
     <div className="glass-card overflow-hidden transition-all duration-500" style={{ minHeight: expanded ? '480px' : '220px', background: 'linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(247,244,234,0.94) 100%)' }}>
       <div className="px-6 py-4 border-b flex items-center justify-between" style={{ borderColor: 'rgba(12, 26, 60, 0.08)' }}>
@@ -69,7 +71,22 @@ export default function AiChat() {
             <div className="text-xs" style={{ color: 'var(--nd-muted)' }}>Search assistance for the demo catalog</div>
           </div>
         </div>
-        <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          {expanded && (
+            <button
+              onClick={() => setExpanded(false)}
+              className="p-1.5 rounded-full transition-colors"
+              aria-label="Collapse chat"
+              title="Collapse chat"
+              style={{ color: 'var(--nd-muted)', background: 'rgba(12,26,60,0.04)' }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M18 15l-6-6-6 6"/>
+              </svg>
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="px-6 py-4 space-y-4 overflow-y-auto" style={{ maxHeight: expanded ? '320px' : '0px', transition: 'max-height 0.4s ease', overflow: expanded ? 'auto' : 'hidden' }}>
@@ -99,7 +116,8 @@ export default function AiChat() {
         <div ref={bottomRef} />
       </div>
 
-      {!expanded && (
+      {/* Show suggestions whenever no conversation has started yet */}
+      {messages.length === 1 && (
         <div className="px-6 py-3 flex gap-2 overflow-x-auto scrollbar-none">
           {SUGGESTIONS.slice(0, 4).map((s, i) => (
             <button
@@ -133,8 +151,9 @@ export default function AiChat() {
           />
           <button
             onClick={() => sendMessage()}
-            disabled={loading || !input.trim()}
-            className="px-4 py-2.5 rounded-xl text-sm font-semibold transition-all disabled:opacity-40"
+            disabled={!canSend}
+            title={canSend ? 'Send message' : 'Type a message first'}
+            className="px-4 py-2.5 rounded-xl text-sm font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ background: 'linear-gradient(135deg, #f7dfa0 0%, var(--nd-gold) 100%)', color: 'var(--nd-navy)', minHeight: '44px', boxShadow: '0 12px 24px rgba(201, 151, 0, 0.18)' }}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
